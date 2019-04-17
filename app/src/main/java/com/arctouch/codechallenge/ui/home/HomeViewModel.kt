@@ -1,6 +1,7 @@
 package com.arctouch.codechallenge.ui.home
 
 import android.arch.lifecycle.MutableLiveData
+import android.content.Intent
 import android.view.View
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.api.TmdbApi
@@ -26,7 +27,17 @@ class HomeViewModel : BaseViewModel() {
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
 
     init {
+        getGenres()
         get()
+    }
+
+    fun getGenres(){
+        subscription = tmdbApi.genres(TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    Cache.cacheGenres(it.genres)
+                }
     }
 
     fun get(page: Long = 1) {

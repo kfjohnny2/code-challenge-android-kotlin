@@ -47,7 +47,7 @@ class MovieDetailsViewModel : BaseViewModel(){
         movieGenres.value = movie.genres?.joinToString(separator = ", ") { it.name }
         movieReleaseDate.value = movie.releaseDate
         moviePosterPath.value = movie.posterPath?.let { movieImageUrlBuilder.buildPosterUrl(it) }
-        movieBackdropPath.value = movie.backdropPath?.let { movieImageUrlBuilder.buildPosterUrl(it) }
+        movieBackdropPath.value = movie.backdropPath?.let { movieImageUrlBuilder.buildBackdropUrl(it) }
         movieOverview.value = movie.overview
     }
 

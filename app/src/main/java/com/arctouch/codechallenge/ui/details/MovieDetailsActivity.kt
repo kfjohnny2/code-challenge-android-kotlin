@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.text.method.ScrollingMovementMethod
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.databinding.MovieDetailsActivityBinding
 
@@ -43,6 +44,8 @@ class MovieDetailsActivity : AppCompatActivity() {
         viewModel.errorMessage.observe(this, Observer { errorMessage ->
             if (errorMessage != null) showError(errorMessage) else hideError()
         })
+
+        binding.overviewTextView.movementMethod = ScrollingMovementMethod()
 
         binding.viewModel = viewModel
     }
