@@ -47,11 +47,11 @@ object NetworkModule {
         httpClient.connectTimeout(230, TimeUnit.SECONDS)
 
         //INTERCEPTORS
-//        httpClient.addInterceptor(logging)
+        httpClient.addInterceptor(logging)
 
         return Retrofit.Builder()
                 .baseUrl(TmdbApi.URL)
-                .client(OkHttpClient.Builder().build())
+                .client(httpClient.build())
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()

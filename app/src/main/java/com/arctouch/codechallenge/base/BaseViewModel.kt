@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel
 import com.arctouch.codechallenge.injection.component.DaggerViewModelInjector
 import com.arctouch.codechallenge.injection.component.ViewModelInjector
 import com.arctouch.codechallenge.injection.module.NetworkModule
+import com.arctouch.codechallenge.ui.details.MovieDetailsViewModel
 import com.arctouch.codechallenge.ui.home.HomeViewModel
 
 abstract class BaseViewModel: ViewModel(){
@@ -23,6 +24,7 @@ abstract class BaseViewModel: ViewModel(){
     private fun inject() {
         when(this){
             is HomeViewModel -> injectorApi.inject(this)
+            is MovieDetailsViewModel -> injectorApi.inject(this)
         }
     }
 

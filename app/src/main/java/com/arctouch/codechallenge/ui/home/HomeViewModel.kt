@@ -42,7 +42,6 @@ class HomeViewModel : BaseViewModel() {
                         { onRetrievePartnerListError() }
                 )
 
-
     }
 
     private fun onRetrievePartnerListStart() {

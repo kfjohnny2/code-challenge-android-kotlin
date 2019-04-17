@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.databinding.MovieItemBinding
 import com.arctouch.codechallenge.model.Movie
+import com.arctouch.codechallenge.ui.details.MovieDetailsActivity
 import com.arctouch.codechallenge.ui.home.movie.MovieViewModel
 import com.arctouch.codechallenge.util.MovieImageUrlBuilder
 import com.bumptech.glide.Glide
@@ -37,14 +38,10 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
         private val viewModel = MovieViewModel()
-        private val movieImageUrlBuilder = MovieImageUrlBuilder()
 
         fun bind(movie: Movie) {
             viewModel.bind(movie)
-            Glide.with(itemView)
-                    .load(movie.posterPath?.let { movieImageUrlBuilder.buildPosterUrl(it) })
-                    .apply(RequestOptions().placeholder(R.drawable.ic_image_placeholder))
-                    .into(itemView.posterImageView)
+            binding.root.setOnClickListener { MovieDetailsActivity.launch(binding.root.context, movie.id.toLong()) }
 
             binding.viewModel = viewModel
         }

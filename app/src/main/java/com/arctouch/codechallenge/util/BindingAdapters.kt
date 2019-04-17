@@ -8,8 +8,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.util.extension.getParentActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 @BindingAdapter("mutableVisibility")
 fun setMutableVisibility(view: View, visibility: MutableLiveData<Int>?) {
@@ -32,7 +34,7 @@ fun setMutableText(view: TextView, text: MutableLiveData<String>?) {
 fun setGlideSrc(view: ImageView, text: MutableLiveData<String>?) {
     val parentActivity: AppCompatActivity? = view.getParentActivity()
     if(parentActivity != null && text != null) {
-        text.observe(parentActivity, Observer { value -> Glide.with(view.context).load(value).into(view);})
+        text.observe(parentActivity, Observer { value -> Glide.with(view.context).load(value).apply(RequestOptions().placeholder(R.drawable.ic_image_placeholder)).into(view);})
     }
 }
 

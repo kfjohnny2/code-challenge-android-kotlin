@@ -22,6 +22,7 @@
         </activity>
 
         <activity android:name="com.arctouch.codechallenge.ui.home.HomeActivity" />
+        <activity android:name=".ui.details.MovieDetailsActivity" />
 
     </application>
 
