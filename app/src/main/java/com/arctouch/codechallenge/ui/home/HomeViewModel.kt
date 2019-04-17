@@ -12,6 +12,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+
 class HomeViewModel : BaseViewModel() {
     @Inject
     lateinit var tmdbApi: TmdbApi
@@ -20,20 +21,23 @@ class HomeViewModel : BaseViewModel() {
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 
+    val totalPages: MutableLiveData<Int> = MutableLiveData()
+
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
 
     init {
         get()
     }
 
-    fun get() {
-        subscription = tmdbApi.upcomingMovies(TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE, 1, TmdbApi.DEFAULT_REGION)
+    fun get(page: Long = 1) {
+        subscription = tmdbApi.upcomingMovies(TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE, page, TmdbApi.DEFAULT_REGION)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe{onRetrievePartnerListStart()}
                 .doOnTerminate{onRetrievePartnerListFinish()}
                 .subscribe(
                         { result ->
+                            totalPages.value = result.totalPages
                             val moviesWithGenres = result.results.map { movie ->
                                 movie.copy(genres = Cache.genres.filter { movie.genreIds?.contains(it.id) == true })
                             }

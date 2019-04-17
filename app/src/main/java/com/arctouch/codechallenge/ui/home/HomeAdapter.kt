@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.movie_item.view.*
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-    private lateinit var movieList: List<Movie>
+    private lateinit var movieList: MutableList<Movie>
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val binding: MovieItemBinding =
@@ -28,7 +28,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     override fun getItemCount() = if (::movieList.isInitialized) movieList.size else 0
 
     fun updatePartnerList(partnerList: List<Movie>) {
-        this.movieList = partnerList
+        if (::movieList.isInitialized) movieList.addAll(partnerList) else movieList = partnerList.toMutableList()
         notifyDataSetChanged()
     }
 
