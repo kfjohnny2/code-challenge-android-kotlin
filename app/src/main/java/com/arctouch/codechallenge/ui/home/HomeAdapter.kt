@@ -3,7 +3,6 @@ package com.arctouch.codechallenge.ui.home
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.databinding.MovieItemBinding
@@ -15,8 +14,10 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.movie_item.view.*
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+
     private lateinit var movieList: List<Movie>
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): HomeAdapter.ViewHolder {
+
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val binding: MovieItemBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(p0.context), R.layout.movie_item, p0, false)
 
@@ -30,7 +31,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(p0: HomeAdapter.ViewHolder, p1: Int) {
+    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0.bind(movieList[p1])//To change body of created functions use File | Settings | File Templates.
     }
 

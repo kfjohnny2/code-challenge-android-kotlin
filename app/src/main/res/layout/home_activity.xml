@@ -7,6 +7,7 @@
             name="viewModel"
             type="com.arctouch.codechallenge.ui.home.HomeViewModel"/>
     </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,6 +19,7 @@
             android:clipToPadding="false"
             android:paddingBottom="12dp"
             android:paddingTop="12dp"
+            app:adapter="@{viewModel.getMovieListAdapter()}"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             tools:itemCount="10"
             tools:listitem="@layout/movie_item" />
@@ -27,7 +29,6 @@
             app:mutableVisibility="@{viewModel.getLoadingVisibility()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:adapter="@{viewModel.getMovieListAdapter()}"
             android:layout_centerInParent="true"
             tools:visibility="gone" />
 

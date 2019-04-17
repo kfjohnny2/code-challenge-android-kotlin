@@ -6,11 +6,11 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
-import com.arctouch.codechallenge.databinding.HomeActivityBinding
+import android.support.v7.app.AppCompatActivity
 import com.arctouch.codechallenge.R
-import com.arctouch.codechallenge.base.BaseActivity
+import com.arctouch.codechallenge.databinding.HomeActivityBinding
 
-class HomeActivity : BaseActivity() {
+class HomeActivity : AppCompatActivity() {
     private lateinit var binding: HomeActivityBinding
     private lateinit var viewModel: HomeViewModel
     private var errorSnackbar: Snackbar? = null

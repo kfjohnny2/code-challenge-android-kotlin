@@ -33,9 +33,6 @@ object NetworkModule {
     @Reusable
     @JvmStatic
     internal fun provideRetrofitInterface(): Retrofit {
-        val gson = GsonBuilder()
-                .setLenient()
-                .create()
 
         val logging =  HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
