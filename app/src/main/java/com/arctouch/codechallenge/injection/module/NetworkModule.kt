@@ -18,10 +18,15 @@ import java.util.concurrent.TimeUnit
 @Module
 object NetworkModule {
 
+    /**
+     * Provides the TmdbApi service implementation.
+     * @param retrofit the Retrofit object used to instantiate the service
+     * @return the TmdbApi service implementation.
+     */
     @Provides
     @Reusable
     @JvmStatic
-    internal fun providePostApi(retrofit: Retrofit): TmdbApi {
+    internal fun provideTmdbApi(retrofit: Retrofit): TmdbApi {
         return retrofit.create(TmdbApi::class.java)
     }
 
