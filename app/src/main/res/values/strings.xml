@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Code Challenge</string>
     <string name="movie_and_genres">%s - %s</string>
+    <string name="upcoming_movie_api_error">Error retrieving upcoming movies</string>
+    <string name="movie_details_backgrop_movie_image_content_description">Backgrop Movie Image</string>
+    <string name="movie_details_api_error">Error while retrieving movie details</string>
 </resources>
