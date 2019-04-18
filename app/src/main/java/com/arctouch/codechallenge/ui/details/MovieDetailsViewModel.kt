@@ -1,19 +1,19 @@
 package com.arctouch.codechallenge.ui.details
 
 import android.arch.lifecycle.MutableLiveData
-import android.view.View
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.api.TmdbApi
 import com.arctouch.codechallenge.base.BaseViewModel
-import com.arctouch.codechallenge.data.Cache
 import com.arctouch.codechallenge.model.Movie
+import com.arctouch.codechallenge.util.API_KEY
+import com.arctouch.codechallenge.util.DEFAULT_LANGUAGE
 import com.arctouch.codechallenge.util.MovieImageUrlBuilder
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MovieDetailsViewModel : BaseViewModel(){
+class MovieDetailsViewModel : BaseViewModel() {
     @Inject
     lateinit var tmdbApi: TmdbApi
 
@@ -30,19 +30,18 @@ class MovieDetailsViewModel : BaseViewModel(){
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
 
     fun get(movieId: Long) {
-        subscription = tmdbApi.movie(movieId, TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE)
+        subscription = tmdbApi.movie(movieId, API_KEY, DEFAULT_LANGUAGE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe{onRetrievePartnerListStart()}
-                .doOnTerminate{onRetrievePartnerListFinish()}
+                .doOnSubscribe { onRetrievePartnerListStart() }
+                .doOnTerminate { onRetrievePartnerListFinish() }
                 .subscribe(
-                        { result -> bind(result)},
+                        { result -> bind(result) },
                         { onRetrievePartnerListError() }
                 )
-
     }
 
-    fun bind(movie: Movie){
+    private fun bind(movie: Movie) {
         movieTitle.value = movie.title
         movieGenres.value = movie.genres?.joinToString(separator = ", ") { it.name }
         movieReleaseDate.value = movie.releaseDate
@@ -66,9 +65,11 @@ class MovieDetailsViewModel : BaseViewModel(){
     fun getMoviePosterPath(): MutableLiveData<String> {
         return moviePosterPath
     }
+
     fun getMovieBackdropPath(): MutableLiveData<String> {
         return movieBackdropPath
     }
+
     fun getMovieOverview(): MutableLiveData<String> {
         return movieOverview
     }
@@ -77,8 +78,9 @@ class MovieDetailsViewModel : BaseViewModel(){
         errorMessage.value = null
     }
 
-    private fun onRetrievePartnerListFinish() {
+    internal fun onRetrievePartnerListFinish() {
     }
+
     private fun onRetrievePartnerListError() {
         errorMessage.value = R.string.movie_details_api_error
     }

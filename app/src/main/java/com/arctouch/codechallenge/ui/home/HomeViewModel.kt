@@ -1,13 +1,15 @@
 package com.arctouch.codechallenge.ui.home
 
 import android.arch.lifecycle.MutableLiveData
-import android.content.Intent
 import android.view.View
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.api.TmdbApi
 import com.arctouch.codechallenge.base.BaseViewModel
 import com.arctouch.codechallenge.data.Cache
 import com.arctouch.codechallenge.model.Movie
+import com.arctouch.codechallenge.util.API_KEY
+import com.arctouch.codechallenge.util.DEFAULT_LANGUAGE
+import com.arctouch.codechallenge.util.DEFAULT_REGION
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -28,11 +30,11 @@ class HomeViewModel : BaseViewModel() {
 
     init {
         getGenres()
-        get()
+        getUpcomingMovies()
     }
 
     fun getGenres(){
-        subscription = tmdbApi.genres(TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE)
+        subscription = tmdbApi.genres(API_KEY, DEFAULT_LANGUAGE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
@@ -40,8 +42,8 @@ class HomeViewModel : BaseViewModel() {
                 }
     }
 
-    fun get(page: Long = 1) {
-        subscription = tmdbApi.upcomingMovies(TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE, page, TmdbApi.DEFAULT_REGION)
+    fun getUpcomingMovies(page: Long = 1) {
+        subscription = tmdbApi.upcomingMovies(API_KEY, DEFAULT_LANGUAGE, page, DEFAULT_REGION)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe{onRetrievePartnerListStart()}

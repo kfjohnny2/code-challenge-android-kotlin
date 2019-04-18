@@ -58,4 +58,9 @@ class MovieDetailsActivity : AppCompatActivity() {
     private fun hideError() {
         errorSnackbar?.dismiss()
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finish()
+    }
 }

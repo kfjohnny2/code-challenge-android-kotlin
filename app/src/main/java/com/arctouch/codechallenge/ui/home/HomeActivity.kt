@@ -27,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
         binding.recyclerView.addOnScrollListener(object : EndlessRecyclerOnScrollListener() {
             override fun onLoadMore() {
                 if (pagesLoaded < viewModel.totalPages.value!!)
-                    viewModel.get((++pagesLoaded).toLong())
+                    viewModel.getUpcomingMovies((++pagesLoaded).toLong())
             }
 
         })
